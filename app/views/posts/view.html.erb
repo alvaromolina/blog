@@ -1,21 +1,44 @@
 <p id="notice"><%= notice %></p>
 
- <b>Title:</b>
- <%= @post.title %>
+<div class="row">
+	<div class="offset2">
+		<div class="media thumbnail">
+			<div class="media-body ">
+				<h3 class="media-heading">
+					<%= link_to @post.title, '/posts/view/'+@post.id.to_s %><br>
+				</h3> 
+				<h6 class="media-heading muted"><%= @post.created_at.strftime("%d/%m/%Y %H:%M:%S") %><br>
+				</h6>
+				<p class="lead">
+					<%= @post.body %>
+				</p>
 
- <%= @post.body %>
+				<%= link_to 'Like ', '/posts/like/'+@post.id.to_s %>  |
+				<%= (@post.likes ? @post.likes.to_s : '0')   + ' People likes' %>
+				<br><br>
+				<%= form_tag("/comments", :method => "post") do %>
+				    <%= label_tag 'Comenta:'%>
+				    <%= text_area_tag :body %>
+				    <%= hidden_field_tag(:post_id, @post.id) %>
+				  	<%= submit_tag("Submit") %>
+				<% end %>
 
- <%= link_to 'like', '/posts/like/'+@post.id.to_s %> 
- <%=  @post.likes ? @post.likes.to_s : '0' + ' People like' %>
+			</div>
+			<hr>
+			<% @post.comments.order(:created_at).reverse.each do |comment| %>
+			<div class="media">
+				<div class="media-body">
+					<p style="padding-left: 10px;">
+						<small><%= comment.body %></small>
+					</p>
+				</div>
+			</div>
+			<hr>
+			<% end %>
+		</div>
+	</div>
+</div>
 
-<%= form_tag("/comments", :method => "post") do %>
-    <%= label_tag 'Comenta:'%><br />
-    <%= text_area_tag :body %>
-    <%= hidden_field_tag(:post_id, @post.id) %>
-  	<%= submit_tag("Submit") %>
-<% end %>
-<% @post.comments.order(:created_at).reverse.each do |comment| %>
-	<%= comment.body %> <br>
-<% end %>
+
 
 <%= link_to 'Back', '/' %>

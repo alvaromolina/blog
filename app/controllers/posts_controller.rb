@@ -88,7 +88,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.likes = (@post.likes ? @post.likes : 0) + 1
     @post.save!
-    redirect_to root_path, notice: 'Post was successfully updated.'
+    redirect_to request.referer, notice: 'Post was successfully updated.'
   end
 
 
