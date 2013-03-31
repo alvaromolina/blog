@@ -1,5 +1,19 @@
 <h1>Listing posts</h1>
 
+<%= form_tag("/posts", :method => "get") do %>
+  <%= label_tag(:q, "buscar palabra en post:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<%= form_tag("/posts", :method => "get") do %>
+  <%= label_tag(:c, "buscar palabra en post:") %>
+  <%= text_field_tag(:c) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+
+
 <table>
   <tr>
     <th>Title</th>
@@ -7,7 +21,10 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
+
   </tr>
+
 
 <% @posts.each do |post| %>
   <tr>
@@ -16,6 +33,7 @@
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to post.status =='1' ? 'Unpublish': 'Publish', '/posts/publish/'+ post.id.to_s + '/' + (post.status == '1' ? '0': '1') %></td
   </tr>
 <% end %>
 </table>

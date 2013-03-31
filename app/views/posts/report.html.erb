@@ -1,0 +1,31 @@
+<h1>Report </h1>
+
+
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Titulo</th>
+    <th>Fecha creacion</th>
+    <th>Fecha modificacion</th>
+    <th>Comentarios</th>
+    <th>Likes</th>
+    <th>Cantidad palabras</th>
+  </tr>
+
+
+<% @posts.each do |post| %>
+  <tr>
+    <td><%= post.id %></td>
+    <td><%= post.title %></td>
+    <td><%= post.created_at %></td>
+    <td><%= post.updated_at %></td>
+    <td><%= post.comments.count %></td>
+    <td><%= post.likes %></td>
+    <td><%= post.body.split(' ').count %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

@@ -1,10 +1,8 @@
-<h1>Blog Alvaro</h1>
-
+<h1>Blog de Alvaro</h1>
 <% @posts.each do |post| %>
-    <%= post.title %><br>
-    <%= post.created_at %><br>
-    <%= post.body %><br>
+	<%= link_to post.title, '/posts/view/'+post.id.to_s %><br>
+	<%= post.created_at %><br>
+	<%= post.body %><br>
+	<%= link_to 'like', '/posts/like/'+post.id.to_s %> 
+	<%= (post.likes ? post.likes.to_s : '0')   + ' People likes' %>
 <% end %>
-
-
-

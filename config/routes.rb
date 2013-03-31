@@ -1,6 +1,14 @@
 Blog::Application.routes.draw do
+  get '/posts/report/' => 'posts#report'
+ 
   resources :posts
+  resources :comments
+
   root :to => 'posts#list'
+  get '/posts/publish/:id/:status' => 'posts#publish'
+  get '/posts/view/:id' => 'posts#view'
+  get '/posts/like/:id' => 'posts#like'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

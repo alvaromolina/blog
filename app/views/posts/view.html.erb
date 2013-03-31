@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+ <b>Title:</b>
+ <%= @post.title %>
+
+ <%= @post.body %>
+
+ <%= link_to 'like', '/posts/like/'+@post.id.to_s %> 
+ <%=  @post.likes ? @post.likes.to_s : '0' + ' People like' %>
+
+<%= form_tag("/comments", :method => "post") do %>
+    <%= label_tag 'Comenta:'%><br />
+    <%= text_area_tag :body %>
+    <%= hidden_field_tag(:post_id, @post.id) %>
+  	<%= submit_tag("Submit") %>
+<% end %>
+<% @post.comments.order(:created_at).reverse.each do |comment| %>
+	<%= comment.body %> <br>
+<% end %>
+
+<%= link_to 'Back', '/' %>
