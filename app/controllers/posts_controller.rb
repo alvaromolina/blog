@@ -94,7 +94,6 @@ class PostsController < ApplicationController
 
   def report
     @posts = Post.all
-
   end
 
   # PUT /posts/1

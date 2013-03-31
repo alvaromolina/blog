@@ -3,13 +3,13 @@
 <%= form_tag("/posts", :method => "get") do %>
   <%= label_tag(:q, "Buscar palabra en post:") %>
   <%= text_field_tag(:q) %>
-  <%= submit_tag("Search") %>
+  <%= submit_tag("Search", { :class=>"btn btn-primary" }) %>
 <% end %>
 
 <%= form_tag("/posts", :method => "get") do %>
   <%= label_tag(:c, "Buscar palabra en comments:") %>
   <%= text_field_tag(:c) %>
-  <%= submit_tag("Search") %>
+  <%= submit_tag("Search", { :class=>"btn btn-primary" } )  %>
 <% end %>
 
 
@@ -41,4 +41,5 @@
 
 <br />
 
-<%= link_to 'New Post', new_post_path %>
+<%= link_to 'New Post', new_post_path, 
+{ :class=>"btn btn-primary" } %>
