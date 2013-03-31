@@ -1,28 +1,29 @@
 <h1>Listing posts</h1>
 
 <%= form_tag("/posts", :method => "get") do %>
-  <%= label_tag(:q, "buscar palabra en post:") %>
+  <%= label_tag(:q, "Buscar palabra en post:") %>
   <%= text_field_tag(:q) %>
   <%= submit_tag("Search") %>
 <% end %>
 
 <%= form_tag("/posts", :method => "get") do %>
-  <%= label_tag(:c, "buscar palabra en post:") %>
+  <%= label_tag(:c, "Buscar palabra en comments:") %>
   <%= text_field_tag(:c) %>
   <%= submit_tag("Search") %>
 <% end %>
 
 
 
-<table>
+<table class="table table-striped ">
   <tr>
-    <th>Title</th>
-    <th>Body</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-
+    <thead>
+      <th>Title</th>
+      <th>Body</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </thead>
   </tr>
 
 

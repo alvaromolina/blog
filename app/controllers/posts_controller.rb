@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     if params[:c] 
-      @posts = Post.joins(:comments).where("comments.body LIKE '%#{params[:c]}%'")
+      @posts = Post.joins(:comments).where("comments.body LIKE '%#{params[:c]}%'").select("distinct posts.* ")
     else
       q = params[:q] ? "body LIKE '%#{params[:q]}%'" : ""
       @posts = Post.where(q).order(:created_at).reverse      
