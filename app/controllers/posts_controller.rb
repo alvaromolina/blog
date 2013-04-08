@@ -17,6 +17,10 @@ class PostsController < ApplicationController
 
   def list
     @posts = Post.where(:status=>'1').order(:created_at).reverse
+
+    @count_words = Hash.new(0)
+    @posts.map {|p| p.body}.join(" ").split(" ").each{ |word| @count_words[word]+=1}
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -66,6 +70,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(params[:post])
     @post.status = '1'
+    @post.user = current_user
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -86,21 +91,34 @@ class PostsController < ApplicationController
 
   def like
     @post = Post.find(params[:id])
-    @post.likes = (@post.likes ? @post.likes : 0) + 1
+    @post.likes.build(:user=>current_user)
     @post.save!
     redirect_to request.referer, notice: 'Post was successfully updated.'
   end
 
 
   def report
+
+    @order = params[:order] ? params[:order] : 'id'
     @posts = Post.all
+
+    if @order == 'comments_count'
+      @posts.sort_by!{|obj| obj.comments.count}
+    elsif @order == 'count_words'
+      @posts.sort_by!{|obj| obj.body.split(' ').count}
+    else
+      @posts.sort_by!{|obj| obj[@order]}
+    end
+        
+
   end
 
   # PUT /posts/1
   # PUT /posts/1.json
   def update
     @post = Post.find(params[:id])
-
+    @post.user = current_user
+    
     respond_to do |format|
       if @post.update_attributes(params[:post])
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }

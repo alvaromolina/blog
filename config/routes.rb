@@ -1,6 +1,12 @@
 Blog::Application.routes.draw do
+  devise_for :users
+
+    get '/posts/list/' => 'posts#list'
+
+  resources :pruebas
+
+
   get '/posts/report/' => 'posts#report'
- 
   resources :posts
   resources :comments
 

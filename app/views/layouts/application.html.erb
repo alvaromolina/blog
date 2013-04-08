@@ -33,6 +33,12 @@
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+    <link rel="stylesheet" type="text/css" href="assets/jqcloud.css" />
+
+    <%= javascript_include_tag "application" %>
+    <script type="text/javascript" src="assets/jqcloud-1.0.3.min.js"></script>
+
+
   </head>
   <body>
 
@@ -51,6 +57,14 @@
               <li><%= link_to "Report", "/posts/report"  %></li>
             </ul>
           </div><!--/.nav-collapse -->
+          <p class="navbar-text pull-right">
+            <% if user_signed_in? %>
+              Signed in as <%= current_user.email %>. Not you?
+            <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+            <% else %>
+              <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+            <% end %>
+          </p>
         </div>
       </div>
     </div>
@@ -72,7 +86,6 @@
     <!-- Javascripts
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "application" %>
 
   </body>
 </html>

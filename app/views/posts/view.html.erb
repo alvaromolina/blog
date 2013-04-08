@@ -9,12 +9,19 @@
 				</h3> 
 				<h6 class="media-heading muted"><%= @post.created_at.strftime("%d/%m/%Y %H:%M:%S") %><br>
 				</h6>
+				<p> By <%= @post.user ? @post.user.email : ''%></p>
+
 				<p class="lead">
 					<%= @post.body %>
 				</p>
 
-				<%= link_to 'Like ', '/posts/like/'+@post.id.to_s %>  |
-				<%= (@post.likes ? @post.likes.to_s : '0')   + ' People likes' %>
+
+				<%= !@post.user_liked(current_user) ? (link_to 'Like ', '/posts/like/'+@post.id.to_s ) : '' %>  |
+				<%= (@post.likes ? @post.likes.count.to_s : '0')   + ' People likes' %>
+
+				<% @post.likes.each do |like| %>
+					<%= like.user.email %>,
+				<% end %>
 				<br><br>
 				<%= form_tag("/comments", :method => "post") do %>
 				    <%= label_tag 'Comenta:'%>
@@ -28,6 +35,8 @@
 			<% @post.comments.order(:created_at).reverse.each do |comment| %>
 			<div class="media">
 				<div class="media-body">
+					<p> Comment by <%= comment.user ? comment.user.email : ''%></p>
+
 					<p style="padding-left: 10px;">
 						<small><%= comment.body %></small>
 					</p>

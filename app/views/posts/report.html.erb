@@ -1,20 +1,20 @@
 <h2>Report </h2>
 <br>
 
-
 <table class="table table-striped ">
   <tr>
-    <th>Id</th>
-    <th>Titulo</th>
-    <th>Fecha creacion</th>
-    <th>Fecha modificacion</th>
-    <th>Comentarios</th>
-    <th>Likes</th>
-    <th>Cantidad palabras</th>
+    <th> <%= link_to raw('Id <i class="icon-chevron-down">'), :controller=> :posts, :action=>:report, :order=>'id' %></th>
+    <th> <%= link_to  raw('Titulo <i class="icon-chevron-down">'), :controller=> :posts, :action=>:report, :order=>'title' %></th>
+    <th> <%= link_to  raw('Fecha creacion <i class="icon-chevron-down">'), :controller=> :posts, :action=>:report, :order=>'created_at' %></th>
+    <th> <%= link_to  raw('Fecha modificacion <i class="icon-chevron-down">'), :controller=> :posts, :action=>:report, :order=>'updated_at' %></th>
+    <th> <%= link_to  raw('Comentarios <i class="icon-chevron-down">'), :controller=> :posts, :action=>:report, :order=>'comments_count' %></th>
+    <th> <%= link_to raw('Likes <i class="icon-chevron-down">'), :controller=> :posts, :action=>:report, :order=>'likes' %></th>
+    <th> <%= link_to raw('Cantidad palabras <i class="icon-chevron-down">'), :controller=> :posts, :action=>:report, :order=>'count_words' %></th>
   </tr>
 
 
-<% @posts.each do |post| %>
+
+<% @posts.sort_by{|obj| obj[@order]}.each do |post| %>
   <tr>
     <td><%= post.id %></td>
     <td><%= post.title %></td>

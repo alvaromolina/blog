@@ -1,5 +1,7 @@
 <h1>Listing posts</h1>
 
+
+
 <%= form_tag("/posts", :method => "get") do %>
   <%= label_tag(:q, "Buscar palabra en post:") %>
   <%= text_field_tag(:q) %>
@@ -11,7 +13,6 @@
   <%= text_field_tag(:c) %>
   <%= submit_tag("Search", { :class=>"btn btn-primary" } )  %>
 <% end %>
-
 
 
 <table class="table table-striped ">
@@ -38,7 +39,6 @@
   </tr>
 <% end %>
 </table>
-
 <br />
 
 <%= link_to 'New Post', new_post_path, 

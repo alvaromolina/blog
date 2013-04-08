@@ -3,8 +3,7 @@ class CommentsController < ApplicationController
 def create
 
 	@post = Post.find(params[:post_id])
-	@post.comments.build(:body=>params[:body])
-	
+	@post.comments.build(:body=>params[:body],:user=>current_user)
     respond_to do |format|
       if @post.save
         format.html { redirect_to '/posts/view/'+params[:post_id].to_s, notice: 'comment was successfully created.' }
@@ -15,4 +14,5 @@ def create
       end
     end
   end
+  
 end
