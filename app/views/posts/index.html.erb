@@ -35,7 +35,7 @@
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <td><%= link_to post.status =='1' ? 'Unpublish': 'Publish', '/posts/publish/'+ post.id.to_s + '/' + (post.status == '1' ? '0': '1') %></td
+    <td><%= link_to post.status =='1' ? 'Unpublish': 'Publish', '/posts/publish/'+ post.id.to_s + '/' + (post.status == '1' ? '0': '1') %></td>
   </tr>
 <% end %>
 </table>
