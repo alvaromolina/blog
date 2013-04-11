@@ -1,0 +1,27 @@
+<h1>Listing History Posts</h1>
+
+
+
+<table class="table table-striped ">
+  <tr>
+    <thead>
+      <th>Id Post</th>
+      <th>Id</th>
+      <th>Body</th>
+      <th>Fecha</th>
+
+    </thead>
+  </tr>
+
+
+<% @history_posts.each do |history_post| %>
+  <tr>
+    <td><%= history_post.post_id %></td>
+    <td><%= history_post.id %></td>
+    <td><%= history_post.body %></td>
+    <td><%= history_post.created_at %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+

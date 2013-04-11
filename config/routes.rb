@@ -14,6 +14,7 @@ Blog::Application.routes.draw do
   get '/posts/publish/:id/:status' => 'posts#publish'
   get '/posts/view/:id' => 'posts#view'
   get '/posts/like/:id' => 'posts#like'
+  match '/posts/history/:post_id' => 'posts#history'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -35,9 +35,11 @@
 		    <h3 class="media-heading">
 				<%= link_to post.title, '/posts/view/'+post.id.to_s %><br>
 		    </h3> 
+		    <h5>Categoria: <%=post.category%></h5>
 		    <h6 class="media-heading muted"><%= post.created_at.strftime("%d/%m/%Y %H:%M:%S") %><br>
 			</h6>
 			<p> By <%= post.user ? post.user.email : ''%></p>
+
 			<p class="lead">
 				<%= post.body %>
 			</p>

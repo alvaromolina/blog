@@ -4,9 +4,12 @@ class PostsController < ApplicationController
   def index
     if params[:c] 
       @posts = Post.joins(:comments).where("comments.body LIKE '%#{params[:c]}%'").select("distinct posts.* ")
+    elsif params[:category] and params[:category] != ""
+      @posts = Post.where(:category=>params[:category])
     else
       q = params[:q] ? "body LIKE '%#{params[:q]}%'" : ""
-      @posts = Post.where(q).order(:created_at).reverse      
+      @posts = Post.where(q).order(:created_at).reverse  
+
     end
     respond_to do |format|
       format.html # index.html.erb
@@ -15,6 +18,11 @@ class PostsController < ApplicationController
     
   end
 
+
+  def history
+    @history_posts = HistoryPost.where(:post_id=>params[:post_id])
+  end
+  
   def list
     @posts = Post.where(:status=>'1').order(:created_at).reverse
 

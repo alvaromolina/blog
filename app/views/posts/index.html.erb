@@ -14,12 +14,18 @@
   <%= submit_tag("Search", { :class=>"btn btn-primary" } )  %>
 <% end %>
 
+<%= form_tag("/posts", :method => "get") do %>
+  <%= label_tag(:category, "Categoria:") %>
+  <%= select_tag :category, options_for_select({'Todas'=>'','Negocios'=>'Negocios','StartUps'=>'StartUps','Ocio'=>'Ocio'}) %>
+  <%= submit_tag("Search", { :class=>"btn btn-primary" } )  %>
+<% end %>
 
 <table class="table table-striped ">
   <tr>
     <thead>
       <th>Title</th>
       <th>Body</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -32,6 +38,7 @@
   <tr>
     <td><%= post.title %></td>
     <td><%= post.body %></td>
+    <td><%= link_to 'History', {:controller=>:posts, :action=>:history, :post_id=>post.id} %></td>
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
